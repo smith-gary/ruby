@@ -10,7 +10,8 @@ channel = '#TacticalCode'
 socket.puts "NICK #{nickname}"
 socket.puts "USER #{nickname} 0 * #{nickname}"
 socket.puts "JOIN #{channel}"
-socket.puts "PRIVMSG #TacticalCode :I am so happy to be here!"
+
+socket.puts "PRIVMSG #{channel} :I am so happy to be here!"
 
 while message = socket.gets do
     puts message
@@ -18,6 +19,9 @@ while message = socket.gets do
     if message.match('^PING :')
         server = message.split(':').last
         puts "PONG #{server}"
-        socket.puts "PONG #{server}"
+        socket.puts "PONG #{server}" 
+    elsif message.match('How are you?')
+        puts "PRIVMSG #{channel} :I am well thank you and you?"
+        socket.puts "PRIVMSG #{channel} :I am well thank you and you?"    
     end 
 end
